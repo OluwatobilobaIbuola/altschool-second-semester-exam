@@ -14,7 +14,9 @@ import { LinearProgress } from "@mui/material";
 import SingleClient from "./Pages/SingleClient";
 import FeaturesErrorBoundary from "./Pages/FeaturesErrorBoundary";
 import NotFound from "./components/ErrorMessage/NotFound";
+import { useNavigate } from "react-router-dom";
 const App = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<IUserModel>({
     email: "",
     displayName: "",
@@ -43,6 +45,7 @@ const App = () => {
           uid: "",
         });
         removeUser();
+        navigate("/login");
       }
     });
   }, []);
@@ -118,7 +121,7 @@ const App = () => {
         >
           <Routes>
             <Route path="login" element={<Login setUser={setUser} />} />
-            <Route path="*" element={<Navigate to="login" replace />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       )}

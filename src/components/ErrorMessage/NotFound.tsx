@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { welcomeRobo } from "../../assets";
 import styles from "../../styles";
 
 const NotFound = () => {
@@ -8,10 +9,13 @@ const NotFound = () => {
   };
 
   return (
-    <div className="w-[100vw] inset-0 fixed overflow-y-scroll overflow-x-hidden z-[100000] bg-translucent">
+    <div className="w-[100vw] inset-0 fixed overflow-y-scroll overflow-x-hidden z-[100000] dark:bg-primary bg-[white]">
       <div className={`${styles.flexCenter} h-full w-full`}>
-        <div className="p-[2rem] dark:bg-zinc-800 dark:text-dimWhite rounded-[8px] border-dimWhite border-[1px]">
-          <h1 className="text-[32px]">
+        <div
+          className="p-[2rem] bg-zinc-800 dark:bg-dimWhite text-dimWhite dark:text-primary rounded-[8px]
+         dark:border-dimWhite border-primary border-[1px]"
+        >
+          <h1 className="text-[48px]">
             404...
             <br /> Page Not Found.
           </h1>
