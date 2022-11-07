@@ -53,17 +53,16 @@ const Hero = () => {
         </h1>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
           Our team of experts uses a methodology to identify the best client
-          most likely to fit your needs. We examine their performance and strength and make astute decision with this.
+          most likely to fit your needs. We examine their performance and
+          strength and make astute decision with this.
         </p>
       </div>
 
-      <div
-        className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}
-      >
+      <div className={`flex-1 md:my-0 my-10 relative`}>
         <img
           src={clients}
           alt="billing"
-          className="w-[100%] h-[100%] relative z-[5]"
+          className=" h-full w-full -right-[20%] absolute z-[5]"
         />
 
         {/* gradient start */}

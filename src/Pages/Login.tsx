@@ -44,7 +44,7 @@ const Login = ({ setUser }: any) => {
 
   return (
     <>
-      <HelmetSEO title={`Login`} />
+      <HelmetSEO title={`Login | Teneeds Clients Sourcing`} content={`Log in to get started`} href={`/login`}/>
       <div
         className={`${styles.flexCenter} min-h-[100vh] w-[100vw] relative flex-col gap-4  dark:bg-primary`}
       >

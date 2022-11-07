@@ -8,14 +8,23 @@ const Clients = ({ setClients, setIsFetching }: any) => {
   const { userId } = useParams();
   return (
     <>
-     <HelmetSEO title={`Our Clients`} />
+      <HelmetSEO
+        title={`Our Clients | Teneeds Clients Sourcing`}
+        content={`Our team of experts uses a methodology to identify the best client
+          most likely to fit your needs. We examine their performance and
+          strength and make astute decision with this.`}
+        href={`/clients`}
+      />
       {!userId && (
         <section
           className={`transition ease-in-out duration-500  dark:bg-primary mt-[100px] min-h-[100vh] ${styles.flexCenter}`}
         >
           <div className={`${styles.paddingX}  ${styles.flexStart}`}>
             <div className={`${styles.boxWidth}`}>
-              <ClientsList setIsFetching={setIsFetching} setClients={setClients} />
+              <ClientsList
+                setIsFetching={setIsFetching}
+                setClients={setClients}
+              />
             </div>
           </div>
         </section>

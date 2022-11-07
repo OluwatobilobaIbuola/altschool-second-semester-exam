@@ -12,7 +12,11 @@ const SingleClient = ({ clients }: any) => {
 
   return (
     <>
-      <HelmetSEO title={`Clients | ${user?.email}`} />
+      <HelmetSEO
+        title={`Clients | Teneeds Clients Sourcing`}
+        content="Our Clients with right skills to meet your business needs"
+        href={`/clients/${userId}`}
+      />
       <div
         className={`mt-[100px] min-h-[100vh] dark:bg-primary transition ease-in-out duration-500
       `}
