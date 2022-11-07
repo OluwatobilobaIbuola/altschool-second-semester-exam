@@ -89,6 +89,10 @@
   );
 }
 
+.bg-opaque{
+  background-color: rgba(0,0,0,0.2);
+}
+
 .bg-discount-gradient {
   background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 }
