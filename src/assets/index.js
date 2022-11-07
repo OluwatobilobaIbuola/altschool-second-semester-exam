@@ -1,4 +1,4 @@
-import robot from "./robot.png";
+import clients from "./clients.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import facebook from "./facebook.svg";
@@ -12,7 +12,7 @@ import discount from "./Discount.svg";
 export {
   welcomeRobo,
   arrowUp,
-  robot,
+  clients,
   menu,
   close,
   facebook,

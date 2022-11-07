@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { provider, auth } from "../firebase";
 import { setUserLocal } from "../utils/helper";
 import { Link } from "react-router-dom";
-import ThemeMode from "../ThemeMode/theme.mode";
 import styles from "../styles";
 import HelmetSEO from "../HelmetSEO";
 const Login = ({ setUser }: any) => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({ username: "", password: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const signIn = (e: any) => {
     e.preventDefault();
+    setIsSubmitting(true);
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -23,12 +26,15 @@ const Login = ({ setUser }: any) => {
           photoUrl: user?.photoURL,
         });
         setUserLocal(user);
+        setIsSubmitting(false);
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         const email = error.customData.email;
         const credential = GoogleAuthProvider.credentialFromError(error);
+        setIsSubmitting(false);
       });
   };
 
@@ -40,9 +46,8 @@ const Login = ({ setUser }: any) => {
     <>
       <HelmetSEO title={`Login`} />
       <div
-        className={`${styles.flexCenter} min-h-[100vh] w-[100vw] flex-col gap-4  dark:bg-primary`}
+        className={`${styles.flexCenter} min-h-[100vh] w-[100vw] relative flex-col gap-4  dark:bg-primary`}
       >
-        <ThemeMode />
         <form className="dark:bg-[#00000076]  border dark:border-dimWhite border-primary gap-8 flex flex-col rounded-[2rem] p-[5rem]">
           <div className="gap-4 flex items-center justify-center ">
             <h1 className=" dark:text-dimWhite uppercase font-bold">teneeds</h1>
@@ -72,8 +77,19 @@ const Login = ({ setUser }: any) => {
             </Link>
           </span>
           <p className="dark:text-dimWhite text-center">Or</p>
-          <button className={`${styles.button}`} onClick={signIn}>
-            Continue with Google
+          <button
+            disabled={isSubmitting}
+            className={`${styles.button}`}
+            onClick={signIn}
+          >
+            {isSubmitting ? (
+              <div
+                className={`w-[20px] h-[20px] border-[3px] border-[white]
+             rounded-[50%] rotation flex mx-auto`}
+              ></div>
+            ) : (
+              "Continue with Google"
+            )}
           </button>
         </form>
       </div>

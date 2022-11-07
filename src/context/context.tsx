@@ -4,7 +4,7 @@ import { EventValuesContextType } from "../utils/types";
 export const EventValues = createContext<EventValuesContextType>(null! || {});
 
 export const EventValuesContext = ({ children }: { children: any }) => {
-  const [mode, setMode] = useState("false");
+  const [mode, setMode] = useState("true");
   const [screenSize, setScreenSize] = useState(0);
 
   const toggleTheme = (mode: string): void => {

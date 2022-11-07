@@ -66,7 +66,7 @@ const App = () => {
   return (
     <div className={mode === "true" ? "dark" : ""}>
       {displayName !== "" && displayName !== undefined ? (
-        <div className="dark:bg-primary w-full overflow-hidden relative transition ease-in-out duration-500">
+        <div className="dark:bg-primary dark:text-dimWhite w-full overflow-hidden relative transition ease-in-out duration-500">
           {isFetching && (
             <LinearProgress
               style={{
@@ -91,7 +91,8 @@ const App = () => {
           >
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/features" element={<FeaturesErrorBoundary />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="features" element={<FeaturesErrorBoundary />} />
               <Route
                 path="clients"
                 element={

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { close,  menu } from "../assets";
+import { close, menu } from "../assets";
 import { navLinks } from "../constants";
 import { auth } from "../firebase";
 import ThemeMode from "../ThemeMode/theme.mode";
@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { EventValues } from "../context/context";
 
 const Navbar = ({ user, setUser }: { user: IUserModel; setUser: any }) => {
+  const navigate = useNavigate();
   const { mode, screenSize, setScreenSize } = useContext(EventValues);
   const [active, setActive] = useState<string>("Home");
   const [toggle, setToggle] = useState<boolean>(false);
@@ -23,6 +24,7 @@ const Navbar = ({ user, setUser }: { user: IUserModel; setUser: any }) => {
         displayName: "",
         uid: "",
       });
+      navigate("/login");
     }
   };
 
@@ -38,7 +40,9 @@ const Navbar = ({ user, setUser }: { user: IUserModel; setUser: any }) => {
       <h1 className="font-poppins dark:text-white font-bold text-[28px]">
         Teneeds
       </h1>
-      <ThemeMode />
+      <div className="dark:text-dimWhite mr-10 ml-auto w-[fit-content]">
+        <ThemeMode />
+      </div>
       <ul className="list-none sm:flex hidden justify-end items-center w-[fit-content]">
         {navLinks.map((nav, index) => (
           <li
