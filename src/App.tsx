@@ -10,7 +10,10 @@ import { getUserLocal, removeUser } from "./utils/helper";
 import Clients from "./Pages/Clients";
 import { Navbar } from "./components";
 import styles from "./styles";
+import { LinearProgress } from "@mui/material";
 import SingleClient from "./Pages/SingleClient";
+import FeaturesErrorBoundary from "./Pages/FeaturesErrorBoundary";
+import NotFound from "./components/ErrorMessage/NotFound";
 const App = () => {
   const [user, setUser] = useState<IUserModel>({
     email: "",
@@ -18,6 +21,7 @@ const App = () => {
     uid: "",
   });
   const [clients, setClients] = useState();
+  const [isFetching, setIsFetching] = useState(false);
   const { displayName } = user;
   const { mode, setMode } = useContext<EventValuesContextType>(
     EventValues || {}
@@ -63,6 +67,18 @@ const App = () => {
     <div className={mode === "true" ? "dark" : ""}>
       {displayName !== "" && displayName !== undefined ? (
         <div className="dark:bg-primary w-full overflow-hidden relative transition ease-in-out duration-500">
+          {isFetching && (
+            <LinearProgress
+              style={{
+                position: "fixed",
+                top: "0",
+                zIndex: "100",
+                left: "0",
+                right: "0",
+              }}
+              color="inherit"
+            />
+          )}
           <div
             className={`fixed right-0 left-0 top-0 filter transition ease-in-out duration-400 h-[100px] ${styles.paddingX} ${styles.flexCenter}`}
           >
@@ -75,9 +91,15 @@ const App = () => {
           >
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/features" element={<FeaturesErrorBoundary />} />
               <Route
                 path="clients"
-                element={<Clients setClients={setClients} />}
+                element={
+                  <Clients
+                    setIsFetching={setIsFetching}
+                    setClients={setClients}
+                  />
+                }
               >
                 <Route
                   path=":userId"
@@ -85,7 +107,7 @@ const App = () => {
                 />
               </Route>
 
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </div>

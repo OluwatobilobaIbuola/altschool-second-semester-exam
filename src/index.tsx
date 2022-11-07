@@ -6,6 +6,7 @@ import { EventValuesContext } from "./context/context";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { HelmetProvider } from "react-helmet-async";
+import { ErrorBoundary } from "./components/ErrorMessage/ErrorBoundary";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -25,7 +26,9 @@ root.render(
       <EventValuesContext>
         <BrowserRouter>
           <HelmetProvider>
-            <App />
+            <ErrorBoundary>
+              <App />
+            </ErrorBoundary>
           </HelmetProvider>
         </BrowserRouter>
       </EventValuesContext>

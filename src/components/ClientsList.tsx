@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
-// import { Skeleton } from "../WithSuspense";
-// import { Error } from "../ErrorMessage/Error";
+import { Skeleton } from "../components/WithSuspense";
+import Error from "../components/ErrorMessage/Error";
 import { EventValues } from "../context/context";
 import { useContext } from "react";
 import styles from "../styles";
@@ -22,7 +22,7 @@ const PageButton = ({ pg, setPage, page }: any) => {
   );
 };
 
-const ClientsList = ({ setClients }: any) => {
+const ClientsList = ({ setClients, setIsFetching }: any) => {
   const [page, setPage] = useState(1);
   const [result, setResult] = useState(10);
   const { screenSize } = useContext(EventValues);
@@ -38,18 +38,19 @@ const ClientsList = ({ setClients }: any) => {
 
   useEffect(() => {
     setClients(clients);
+    setIsFetching(isFetching);
   }, [clients]);
 
   const prevPage = () => setPage((prev) => prev - 1);
   const nextPage = () => setPage((prev) => prev + 1);
 
-  // if (isLoading) {
-  //   return <Skeleton />;
-  // }
+  if (isLoading) {
+    return <Skeleton />;
+  }
 
-  // if (isError) {
-  //   return <Error />;
-  // }
+  if (isError) {
+    return <Error />;
+  }
 
   return (
     <div className={`${styles.boxWidth}  ${styles.paddingY}`}>

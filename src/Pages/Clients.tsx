@@ -4,7 +4,7 @@ import styles from "../styles";
 import { Outlet, useParams } from "react-router-dom";
 import HelmetSEO from "../HelmetSEO";
 
-const Clients = ({ setClients }: any) => {
+const Clients = ({ setClients, setIsFetching }: any) => {
   const { userId } = useParams();
   return (
     <>
@@ -15,7 +15,7 @@ const Clients = ({ setClients }: any) => {
         >
           <div className={`${styles.paddingX}  ${styles.flexStart}`}>
             <div className={`${styles.boxWidth}`}>
-              <ClientsList setClients={setClients} />
+              <ClientsList setIsFetching={setIsFetching} setClients={setClients} />
             </div>
           </div>
         </section>

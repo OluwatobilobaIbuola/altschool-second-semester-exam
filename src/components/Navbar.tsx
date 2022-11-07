@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { close, logo, menu } from "../assets";
+import { close,  menu } from "../assets";
 import { navLinks } from "../constants";
 import { auth } from "../firebase";
 import ThemeMode from "../ThemeMode/theme.mode";

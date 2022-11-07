@@ -14,7 +14,7 @@ const Client = ({ client, index }: any) => {
       />
       <div
         className={`h-[100%] w-full absolute opacity-0 hover:opacity-100  ${styles.flexCenter} 
-        inset-0 z-[3] bg-opaque cursor-pointer transition ease-in-out duration-500`}
+        inset-0 z-[3] bg-translucent cursor-pointer transition ease-in-out duration-500`}
       >
         <div
           className={`w-[40px] h-[40px] rounded-[50%] m-[10px] bg-dimWhite text-primary ${styles.flexCenter} 
