@@ -4,7 +4,7 @@ import styles from "../styles";
 
 export const Skeleton = () => {
   return (
-    <div className="bg-translucentTwo inset-0 fixed w-[100vw] z-[100000]">
+    <div className="dark:bg-primary inset-0 fixed w-[100vw] z-[100000]">
       <div className={`${styles.flexCenter} w-full h-full dark:text-dimWhite`}>
         <CircularProgress color="inherit" />
       </div>
@@ -18,6 +18,3 @@ export const WithSuspense = (Component: any) => (props: any) =>
       <Component {...props} />
     </Suspense>
   );
-
-
-  

@@ -1,30 +1,29 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { lazy, useContext, useEffect, useState } from "react";
 import { EventValues } from "./context/context";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
 import { EventValuesContextType, IUserModel } from "./utils/types";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { getUserLocal, removeUser } from "./utils/helper";
-import Clients from "./Pages/Clients";
 import { Navbar } from "./components";
 import styles from "./styles";
 import { LinearProgress } from "@mui/material";
-import SingleClient from "./Pages/SingleClient";
+import { WithSuspense } from "./components/WithSuspense";
 import FeaturesErrorBoundary from "./Pages/FeaturesErrorBoundary";
 import NotFound from "./components/ErrorMessage/NotFound";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const Home = WithSuspense(lazy(() => import("./Pages/Home")));
+const Login = WithSuspense(lazy(() => import("./Pages/Login")));
+const SingleClient = WithSuspense(lazy(() => import("./Pages/SingleClient")));
+const Clients = WithSuspense(lazy(() => import("./Pages/Clients")));
+
 const App = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<IUserModel>({
-    email: "",
-    displayName: "",
-    uid: "",
-  });
-  const [clients, setClients] = useState();
+  const [user, setUser] = useState<IUserModel | null>(null);
+  const [clients, setClients] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const { displayName } = user;
   const { mode, setMode } = useContext<EventValuesContextType>(
     EventValues || {}
   );
@@ -39,13 +38,9 @@ const App = () => {
           photoUrl: user?.photoURL,
         });
       } else {
-        setUser({
-          email: "",
-          displayName: "",
-          uid: "",
-        });
-        removeUser();
         navigate("/login");
+        setUser(null);
+        removeUser();
       }
     });
   }, []);
@@ -58,17 +53,19 @@ const App = () => {
   }, []);
   useEffect(() => {
     const user = getUserLocal();
-    setUser({
-      email: user?.email,
-      displayName: user?.displayName,
-      uid: user?.uid,
-      photoUrl: user?.photoURL,
-    });
+    if (user) {
+      setUser({
+        email: user?.email,
+        displayName: user?.displayName,
+        uid: user?.uid,
+        photoUrl: user?.photoURL,
+      });
+    }
   }, []);
 
   return (
     <div className={mode === "true" ? "dark" : ""}>
-      {displayName !== "" && displayName !== undefined ? (
+      {!!user ? (
         <div className="dark:bg-primary dark:text-dimWhite w-full overflow-hidden relative transition ease-in-out duration-500">
           {isFetching && (
             <LinearProgress
@@ -125,6 +122,7 @@ const App = () => {
           </Routes>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

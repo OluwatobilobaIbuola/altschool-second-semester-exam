@@ -13,17 +13,12 @@ const Navbar = ({ user, setUser }: { user: IUserModel; setUser: any }) => {
   const { mode, screenSize, setScreenSize } = useContext(EventValues);
   const [active, setActive] = useState<string>("Home");
   const [toggle, setToggle] = useState<boolean>(false);
-  const { displayName } = user;
 
   const Logout = (title: any) => {
     if (title === "Login") {
       auth.signOut();
       removeUser();
-      setUser({
-        email: "",
-        displayName: "",
-        uid: "",
-      });
+      setUser(null);
       navigate("/login");
     }
   };
@@ -55,14 +50,8 @@ const Navbar = ({ user, setUser }: { user: IUserModel; setUser: any }) => {
               setActive(nav.title);
             }}
           >
-            <Link
-              to={
-                nav.title === "Login" && displayName !== "" ? "" : `${nav.id}`
-              }
-            >
-              {nav.title === "Login" && displayName !== ""
-                ? "Logout"
-                : `${nav.title}`}
+            <Link to={nav.title === "Login" && !!user ? "" : `${nav.id}`}>
+              {nav.title === "Login" && !!user ? "Logout" : `${nav.title}`}
             </Link>
           </li>
         ))}
@@ -95,17 +84,9 @@ const Navbar = ({ user, setUser }: { user: IUserModel; setUser: any }) => {
                   setActive(nav.title);
                 }}
               >
-                <Link
-                  to={
-                    nav.title === "Login" && displayName !== ""
-                      ? ""
-                      : `${nav.id}`
-                  }
-                >
+                <Link to={nav.title === "Login" && !!user ? "" : `${nav.id}`}>
                   {" "}
-                  {nav.title === "Login" && displayName !== ""
-                    ? "Logout"
-                    : `${nav.title}`}
+                  {nav.title === "Login" && !!user ? "Logout" : `${nav.title}`}
                 </Link>
               </li>
             ))}

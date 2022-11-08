@@ -1,3 +1,4 @@
+import { ToastOptions } from "./utils/types";
 const styles = {
   boxWidth: "xl:max-w-[1280px] w-full",
 
@@ -29,6 +30,16 @@ export const layout = {
   sectionImg: `flex-1 flex ${styles.flexCenter} md:ml-10 ml-0 md:mt-0 mt-10 relative`,
 
   sectionInfo: `flex-1 ${styles.flexStart} flex-col`,
+};
+
+export const toastOptions: ToastOptions = {
+  position: "top-right",
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
 };
 
 export default styles;

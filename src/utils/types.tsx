@@ -26,6 +26,16 @@ export type EventValuesContextType = {
   mode: string;
 };
 
+export interface ToastOptions {
+  position: string | undefined;
+  autoClose: 2000;
+  hideProgressBar: false;
+  closeOnClick: true;
+  pauseOnHover: true;
+  draggable: true;
+  progress: undefined;
+}
+
 //returned data type of any method
 // interface IMovieModel {
 //   title: string;

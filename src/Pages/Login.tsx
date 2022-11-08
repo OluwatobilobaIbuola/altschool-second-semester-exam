@@ -4,8 +4,10 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { provider, auth } from "../firebase";
 import { setUserLocal } from "../utils/helper";
 import { Link } from "react-router-dom";
-import styles from "../styles";
+import styles, { toastOptions } from "../styles";
 import HelmetSEO from "../HelmetSEO";
+import { toast } from "react-toastify";
+
 const Login = ({ setUser }: any) => {
   const navigate = useNavigate();
   const [values, setValues] = useState({ username: "", password: "" });
@@ -30,10 +32,21 @@ const Login = ({ setUser }: any) => {
         navigate("/");
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        if (
+          errorMessage === "Firebase: Error (auth/network-error)." ||
+          errorMessage === "Firebase: Error (auth/internal-error)."
+        ) {
+          toast.error("Network Error, Try Again", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
         setIsSubmitting(false);
       });
   };
@@ -44,7 +57,11 @@ const Login = ({ setUser }: any) => {
 
   return (
     <>
-      <HelmetSEO title={`Login | Teneeds Clients Sourcing`} content={`Log in to get started`} href={`/login`}/>
+      <HelmetSEO
+        title={`Login | Teneeds Clients Sourcing`}
+        content={`Log in to get started`}
+        href={`/login`}
+      />
       <div
         className={`${styles.flexCenter} min-h-[100vh] w-[100vw] relative flex-col gap-4  dark:bg-primary`}
       >
