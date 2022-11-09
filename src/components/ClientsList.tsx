@@ -65,9 +65,12 @@ const ClientsList = ({ setClients, setIsFetching }: any) => {
             Prev
           </button>
           {screenSize > 768 &&
-            [1, 2, 3, 4, 5].map((pg) => (
-              <PageButton key={pg} pg={pg} page={page} setPage={setPage} />
-            ))}
+            Array(5)
+              .fill(undefined)
+              .map((_, i) => i + 1)
+              .map((pg) => (
+                <PageButton key={pg} pg={pg} page={page} setPage={setPage} />
+              ))}
           <p className="whitespace-nowrap py-0 dark:text-dimWhite px-[0.5rem]">
             Page {clients?.info?.page}
           </p>
