@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { provider, auth } from "../firebase";
@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 import styles, { toastOptions } from "../styles";
 import HelmetSEO from "../HelmetSEO";
 import { toast } from "react-toastify";
+import { EventValues } from "../context/context";
 
-const Login = ({ setUser }: any) => {
+const Login = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(EventValues);
   const [values, setValues] = useState({ username: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const signIn = (e: any) => {

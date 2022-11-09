@@ -24,6 +24,12 @@ export type EventValuesContextType = {
   screenSize: number;
   toggleTheme(value: string): void;
   mode: string;
+  setIsFetching(value: boolean): void;
+  isFetching: boolean;
+  clients: any[];
+  setClients(value: any[]): void;
+  setUser(value: IUserModel | null): void;
+  user: IUserModel | null;
 };
 
 export interface ToastOptions {

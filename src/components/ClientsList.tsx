@@ -7,7 +7,7 @@ import { EventValues } from "../context/context";
 import { useContext } from "react";
 import styles from "../styles";
 import Client from "./Client";
-import { getUsers } from "../services/apis";
+import { getClients } from "../services/apis";
 
 const PageButton = ({ pg, setPage, page }: any) => {
   return (
@@ -22,24 +22,24 @@ const PageButton = ({ pg, setPage, page }: any) => {
   );
 };
 
-const ClientsList = ({ setClients, setIsFetching }: any) => {
+const ClientsList = () => {
   const [page, setPage] = useState(1);
   const [result, setResult] = useState(10);
-  const { screenSize } = useContext(EventValues);
+  const { screenSize, setIsFetching, setClients } = useContext(EventValues);
   const {
     isLoading,
     isError,
     isFetching,
-    data: clients,
+    data: clientsdata,
     isPreviousData,
-  } = useQuery(["users", page, result], () => getUsers(page, result), {
+  } = useQuery(["clientsdata", page, result], () => getClients(page, result), {
     keepPreviousData: true,
   });
 
   useEffect(() => {
-    setClients(clients);
+    setClients(clientsdata?.results);
     setIsFetching(isFetching);
-  }, [clients]);
+  }, [clientsdata]);
 
   const prevPage = () => setPage((prev) => prev - 1);
   const nextPage = () => setPage((prev) => prev + 1);
@@ -72,7 +72,7 @@ const ClientsList = ({ setClients, setIsFetching }: any) => {
                 <PageButton key={pg} pg={pg} page={page} setPage={setPage} />
               ))}
           <p className="whitespace-nowrap py-0 dark:text-dimWhite px-[0.5rem]">
-            Page {clients?.info?.page}
+            Page {clientsdata?.info?.page}
           </p>
           <button
             className="p-[0.5rem] w-[70px] h-auto m-0 mr-2 rounded-[4px] border-[1.5px]
@@ -85,8 +85,8 @@ const ClientsList = ({ setClients, setIsFetching }: any) => {
         </nav>
       </div>
       <div className={` ${styles.flexCenter} flex-wrap`}>
-        {clients?.results?.length > 1 &&
-          clients?.results?.map((client: any, index: number) => {
+        {clientsdata?.results?.length > 1 &&
+          clientsdata?.results?.map((client: any, index: number) => {
             return <Client client={client} index={index} />;
           })}
       </div>

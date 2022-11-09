@@ -8,9 +8,10 @@ import { IUserModel } from "../utils/types";
 import { Link, useNavigate } from "react-router-dom";
 import { EventValues } from "../context/context";
 
-const Navbar = ({ user, setUser }: { user: IUserModel; setUser: any }) => {
+const Navbar = () => {
   const navigate = useNavigate();
-  const { mode, screenSize, setScreenSize } = useContext(EventValues);
+  const { mode, screenSize, setScreenSize, setUser, user } =
+    useContext(EventValues);
   const [active, setActive] = useState<string>("Home");
   const [toggle, setToggle] = useState<boolean>(false);
 

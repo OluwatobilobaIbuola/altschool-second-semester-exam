@@ -21,12 +21,7 @@ const Clients = WithSuspense(lazy(() => import("./Pages/Clients")));
 
 const App = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<IUserModel | null>(null);
-  const [clients, setClients] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const { mode, setMode } = useContext<EventValuesContextType>(
-    EventValues || {}
-  );
+  const { mode, setMode, isFetching, setUser, user } = useContext(EventValues);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -83,7 +78,7 @@ const App = () => {
             className={`fixed right-0 left-0 top-0 filter transition ease-in-out duration-400 h-[100px] ${styles.paddingX} ${styles.flexCenter}`}
           >
             <div className={`${styles.boxWidth}`}>
-              <Navbar setUser={setUser} user={user} />
+              <Navbar />
             </div>
           </div>
           <div
@@ -93,19 +88,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="features" element={<FeaturesErrorBoundary />} />
-              <Route
-                path="clients"
-                element={
-                  <Clients
-                    setIsFetching={setIsFetching}
-                    setClients={setClients}
-                  />
-                }
-              >
-                <Route
-                  path=":userId"
-                  element={<SingleClient clients={clients} />}
-                />
+              <Route path="clients" element={<Clients />}>
+                <Route path=":clientId" element={<SingleClient />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />
@@ -117,7 +101,7 @@ const App = () => {
           className={`transition ease-in-out duration-500 dark:bg-primary ${styles.flexStart}`}
         >
           <Routes>
-            <Route path="login" element={<Login setUser={setUser} />} />
+            <Route path="login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

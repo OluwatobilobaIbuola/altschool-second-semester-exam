@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../components/Button";
+import { EventValues } from "../context/context";
 import HelmetSEO from "../HelmetSEO";
 import styles from "../styles";
 
-const SingleClient = ({ clients }: any) => {
-  const { userId } = useParams();
-  const user = clients?.results?.find(
-    (client: any) => client?.id?.value === userId
-  );
+const SingleClient = () => {
+  const { clients } = useContext(EventValues);
+  const { clientId } = useParams();
+  const user = clients?.find((client) => client?.id?.value === clientId);
 
   return (
     <>
       <HelmetSEO
         title={`Clients | Teneeds Clients Sourcing`}
         content="Our Clients with right skills to meet your business needs"
-        href={`/clients/${userId}`}
+        href={`/clients/${clientId}`}
       />
       <div
         className={`mt-[100px] min-h-[100vh] dark:bg-primary transition ease-in-out duration-500
