@@ -87,7 +87,7 @@ const ClientsList = () => {
       <div className={` ${styles.flexCenter} flex-wrap`}>
         {clientsdata?.results?.length > 1 &&
           clientsdata?.results?.map((client: any, index: number) => {
-            return <Client client={client} index={index} />;
+            return <Client key={index} client={client} index={index} />;
           })}
       </div>
     </div>

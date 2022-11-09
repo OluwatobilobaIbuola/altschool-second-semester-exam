@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { createContext, useState } from "react";
-import { EventValuesContextType, IUserModel } from "../utils/types";
+import { EventValuesContextType, IUserModel, mode } from "../utils/types";
 
 export const EventValues = createContext<EventValuesContextType>({
   mode: "true",
@@ -21,13 +21,13 @@ export const EventValuesContext = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [mode, setMode] = useState("true");
+  const [mode, setMode] = useState<mode>("true");
   const [screenSize, setScreenSize] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
   const [clients, setClients] = useState<any[]>([]);
   const [user, setUser] = useState<IUserModel | null>(null);
 
-  const toggleTheme = (mode: string): void => {
+  const toggleTheme = (mode: mode): void => {
     if (mode === "false") {
       setMode("true");
       localStorage.setItem("mode", "true");

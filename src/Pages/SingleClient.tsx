@@ -8,7 +8,7 @@ import styles from "../styles";
 const SingleClient = () => {
   const { clients } = useContext(EventValues);
   const { clientId } = useParams();
-  const user = clients?.find((client) => client?.id?.value === clientId);
+  const client = clients?.find((client) => client?.id?.value === clientId);
 
   return (
     <>
@@ -23,22 +23,22 @@ const SingleClient = () => {
       >
         <div className={`${styles.paddingX}  ${styles.flexStart}`}>
           <div className={`${styles.boxWidth}`}>
-            <div className="flex p-[50px] sm:p-[10px]  flex-col sm:flex-row">
+            <div className="flex sm:p-[50px] p-[10px]  flex-col sm:flex-row">
               <div className="min-w-[50%]">
                 <img
-                  className="w-[100%] h-[90vh] sm:object-cover sm:h-[70vh] object-contain"
-                  src={user?.picture?.large}
+                  className="w-[100%] sm:h-[90vh] sm:object-cover h-[50vh] object-contain"
+                  src={client?.picture?.large}
                 />
               </div>
               <div className="py-0 sm:px-[30px] min-w-[50%] p-[10px]">
                 <div className="dark:text-dimWhite font-[400] text-[28px] break-all">
-                  {user?.email}
+                  {client?.email}
                 </div>
                 <div className="dark:text-dimWhite font-[600] text-[24px] my-[20px] mx-0">
-                  {user?.location?.city}
+                  {client?.location?.city}
                 </div>
                 <div className="dark:text-dimWhite font-[400] text-[40px] ">
-                  {user?.phone}
+                  {client?.phone}
                 </div>
                 <Button styles="mt-[20px]" />
               </div>

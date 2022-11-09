@@ -4,8 +4,10 @@ import styles from "../styles";
 
 export const Skeleton = () => {
   return (
-    <div className="dark:bg-primary inset-0 fixed w-[100vw] z-[100000]">
-      <div className={`${styles.flexCenter} w-full h-full dark:text-dimWhite`}>
+    <div className="dark:bg-primary bg-dimWhite inset-0 fixed w-[100vw] z-[100000]">
+      <div
+        className={`${styles.flexCenter} w-full h-full dark:text-dimWhite text-[black]`}
+      >
         <CircularProgress color="inherit" />
       </div>
     </div>

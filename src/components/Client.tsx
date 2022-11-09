@@ -3,7 +3,7 @@ import styles from "../styles";
 import { Link } from "react-router-dom";
 import { FavoriteBorderOutlined, SearchOutlined } from "@mui/icons-material";
 
-const Client = ({ client, index }: any) => {
+const Client = ({ client }: any) => {
   return (
     <div
       className={`${styles.flexCenter} m-[5px] min-w-[280px] h-[350px] flex-1 relative bg-[#f5fbfd]`}
@@ -20,7 +20,7 @@ const Client = ({ client, index }: any) => {
           className={`w-[40px] h-[40px] rounded-[50%] m-[10px] bg-dimWhite text-primary ${styles.flexCenter} 
           transition ease-in-out duration-500 hover:bg-primary hover:text-dimWhite hover:scale-110`}
         >
-          <Link to={`/clients/${client.id.value}`}>
+          <Link to={`/clients/${client?.id?.value}`}>
             <SearchOutlined />
           </Link>
         </div>

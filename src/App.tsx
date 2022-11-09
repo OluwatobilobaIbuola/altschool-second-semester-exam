@@ -1,6 +1,6 @@
 import React, { lazy, useContext, useEffect, useState } from "react";
 import { EventValues } from "./context/context";
-import { EventValuesContextType, IUserModel } from "./utils/types";
+import { mode } from "./utils/types";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -10,7 +10,6 @@ import styles from "./styles";
 import { LinearProgress } from "@mui/material";
 import { WithSuspense } from "./components/WithSuspense";
 import FeaturesErrorBoundary from "./Pages/FeaturesErrorBoundary";
-import NotFound from "./components/ErrorMessage/NotFound";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +17,9 @@ const Home = WithSuspense(lazy(() => import("./Pages/Home")));
 const Login = WithSuspense(lazy(() => import("./Pages/Login")));
 const SingleClient = WithSuspense(lazy(() => import("./Pages/SingleClient")));
 const Clients = WithSuspense(lazy(() => import("./Pages/Clients")));
+const NotFound = WithSuspense(
+  lazy(() => import("./components/ErrorMessage/NotFound"))
+);
 
 const App = () => {
   const navigate = useNavigate();
@@ -41,9 +43,11 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const mode = localStorage.getItem("mode");
-    if (mode) {
-      setMode(mode);
+    const localMode = localStorage.getItem("mode");
+    if (localMode === null) {
+      return;
+    } else if (localMode === "true" || localMode === "false") {
+      setMode(localMode);
     }
   }, []);
   useEffect(() => {

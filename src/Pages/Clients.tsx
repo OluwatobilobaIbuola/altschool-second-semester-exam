@@ -5,7 +5,7 @@ import { Outlet, useParams } from "react-router-dom";
 import HelmetSEO from "../HelmetSEO";
 
 const Clients = () => {
-  const { userId } = useParams();
+  const { clientId } = useParams();
   return (
     <>
       <HelmetSEO
@@ -15,13 +15,13 @@ const Clients = () => {
           strength and make astute decision with this.`}
         href={`/clients`}
       />
-      {!userId && (
+      {!clientId && (
         <section
           className={`transition ease-in-out duration-500  dark:bg-primary mt-[100px] min-h-[100vh] ${styles.flexCenter}`}
         >
           <div className={`${styles.paddingX}  ${styles.flexStart}`}>
             <div className={`${styles.boxWidth}`}>
-              <ClientsList  />
+              <ClientsList />
             </div>
           </div>
         </section>

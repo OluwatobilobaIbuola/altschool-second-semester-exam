@@ -3,6 +3,9 @@ export type Links = {
   id: string;
   title: string;
 };
+
+export type mode = "true" | "false";
+
 export type IUserModel = {
   email: string | null;
   uid: string | null;
@@ -19,11 +22,11 @@ export interface Stats extends LinksInterface {
 }
 
 export type EventValuesContextType = {
-  setMode(value: string): void;
+  setMode(value: mode): void;
   setScreenSize(value: number): void;
   screenSize: number;
   toggleTheme(value: string): void;
-  mode: string;
+  mode: mode;
   setIsFetching(value: boolean): void;
   isFetching: boolean;
   clients: any[];

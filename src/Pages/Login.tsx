@@ -67,7 +67,10 @@ const Login = () => {
       <div
         className={`${styles.flexCenter} min-h-[100vh] w-[100vw] relative flex-col gap-4  dark:bg-primary`}
       >
-        <form className="dark:bg-[#00000076]  border dark:border-dimWhite border-primary gap-8 flex flex-col rounded-[2rem] p-[5rem]">
+        <form
+          className="dark:bg-[#00000076]  border dark:border-dimWhite border-primary 
+          gap-y-[1rem] flex flex-col  sm:p-[5rem] sm:rounded-[2rem] rounded-[1rem] p-[1rem]"
+        >
           <div className="gap-4 flex items-center justify-center ">
             <h1 className=" dark:text-dimWhite uppercase font-bold">teneeds</h1>
           </div>
@@ -98,12 +101,12 @@ const Login = () => {
           <p className="dark:text-dimWhite text-center">Or</p>
           <button
             disabled={isSubmitting}
-            className={`${styles.button}`}
+            className={`${styles.button} disabled:cursor-not-allowed`}
             onClick={signIn}
           >
             {isSubmitting ? (
               <div
-                className={`w-[20px] h-[20px] border-[3px] border-[white]
+                className={`w-[20px] h-[20px] border-[3px] border-[white] border-b-[transparent]
              rounded-[50%] rotation flex mx-auto`}
               ></div>
             ) : (
