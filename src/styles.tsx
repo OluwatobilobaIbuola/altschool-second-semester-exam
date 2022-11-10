@@ -19,7 +19,7 @@ const styles = {
   button:
     "border rounded-[4px] cursor-[pointer] font-bold uppercase text-dimWhite bg-blue-gradient outline-none hover:opacity-[0.8] w-full h-[48px] ",
   input:
-    "bg-[transparent] border-[0.1rem] px-[2rem] py-[1rem] rounded-[0.4rem] outline-none hover:border-secondary focus:border-secondary dark:text-dimWhite w-full text-[1rem]",
+    "bg-[transparent] border-[0.1rem] border-primary px-[2rem] py-[1rem] rounded-[0.4rem] outline-none hover:border-secondary focus:border-secondary dark:text-dimWhite w-full text-[1rem]",
 };
 
 export const layout = {

@@ -69,7 +69,7 @@ const Login = () => {
       >
         <form
           className="dark:bg-[#00000076]  border dark:border-dimWhite border-primary 
-          gap-y-[1rem] flex flex-col  sm:p-[5rem] sm:rounded-[2rem] rounded-[1rem] p-[1rem]"
+          gap-y-[1rem] flex flex-col  sm:p-[5rem] sm:rounded-[2rem] rounded-[1rem] py-[2.5rem] px-[1rem]"
         >
           <div className="gap-4 flex items-center justify-center ">
             <h1 className=" dark:text-dimWhite uppercase font-bold">teneeds</h1>
